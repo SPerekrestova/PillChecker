@@ -164,8 +164,8 @@
 
         <!-- Header or top section -->
         <div class="header">
-            <h1>Welcome, {{ request.auth_user.display_name }}!</h1>
-            <a href="{% url 'logout' %}">Log Out</a>
+            <h1>Welcome, {{ user.display_name }}!</h1>
+            <a href="{{ url_for('logout') }}" class="button">Log Out</a>
         </div>
 
         <hr style="margin-bottom: var(--spacing-md);">
@@ -176,24 +176,24 @@
             <ul class="medication-list">
                 {% for medication in medications %}
                     <li class="medication-item">
-                        <strong>{{ medication.title|default:"Medication" }}</strong>
+                        <strong>{{ medication.title if medication.title else "Medication" }}</strong>
                         <div class="medication-details">
                             <em>Scanned on:</em> {{ medication.scan_date }}<br>
-                            <em>Active ingredients:</em> {{ medication.active_ingredients|default:"N/A" }}<br>
-                            <em>Dosage:</em> {{ medication.dosage|default:"N/A" }}<br>
-                            <em>Prescription Details:</em> {{ medication.prescription_details|default:"N/A" }}
+                            <em>Active ingredients:</em> {{ medication.active_ingredients if medication.active_ingredients else "N/A" }}<br>
+                            <em>Dosage:</em> {{ medication.dosage if medication.dosage else "N/A" }}<br>
+                            <em>Prescription Details:</em> {{ medication.prescription_details if medication.prescription_details else "N/A" }}
                         </div>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
             <div class="no-medications">
-                <p>You have no scanned medications yet. <a href="{% url 'upload' %}">Scan one now!</a></p>
+                <p>You have no scanned medications yet. <a href="{{ url_for('upload') }}">Scan one now!</a></p>
             </div>
         {% endif %}
 
-        <a href="{% url 'upload' %}" class="button">Scan More Medications</a>
-        <a href="{% url 'update_profile' %}" class="button">Update Profile</a>
+        <a href="{{ url_for('upload') }}" class="button">Scan More Medications</a>
+        <a href="{{ url_for('update_profile') }}" class="button">Update Profile</a>
     </div>
 </body>
 </html>

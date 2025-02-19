@@ -1,10 +1,12 @@
-Django==4.2.16
-djangorestframework==3.15.2
+alembic
 easyocr==1.7.2
 gevent==24.11.1
 gunicorn==22.0.0
-Pillow==11.1.0
+itsdangerous
 psycopg2-binary==2.9.10
-python-decouple==3.8
+pydantic
+python-dotenv
+python-multipart
 Requests==2.32.3
+sqlalchemy
 supabase==2.11.0

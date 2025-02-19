@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from main import app, setup_model
+from model.main import app, setup_model
 
 
 # --- Dummy Classes for Mocking spaCy and scispaCy Behavior --- #

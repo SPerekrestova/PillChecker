@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Upload Medication</title>
     <!-- 1. Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -39,7 +39,7 @@
 
         .container {
             width: 90%;
-            max-width: 400px;
+            max-width: 600px;
             margin: var(--spacing-lg) auto;
             padding: var(--spacing-lg);
             background-color: var(--card-background);
@@ -60,7 +60,8 @@
             color: #666;
             font-size: 0.95rem;
         }
-        input {
+        input[type="file"],
+        input[type="text"] {
             margin-bottom: var(--spacing-md);
             padding: var(--spacing-sm) var(--spacing-md);
             border: 1px solid var(--border-color);
@@ -81,8 +82,13 @@
             background-color: var(--primary-hover-color);
             transform: translateY(-1px);
         }
-        p {
+
+        .messages {
             margin: var(--spacing-md) 0;
+            color: red;
+            text-align: center;
+        }
+        p {
             text-align: center;
             color: #666;
         }
@@ -93,37 +99,30 @@
         a:hover {
             text-decoration: underline;
         }
-        .messages {
-            margin: var(--spacing-md) 0;
-            color: red;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Create an Account</h2>
-        <form method="POST">
-            {% csrf_token %}
-            <label for="id_email">Email:</label>
-            <input type="email" name="email" id="id_email" required>
-
-            <label for="id_password1">Password:</label>
-            <input type="password" name="password1" id="id_password1" required>
-
-            <label for="id_password2">Confirm Password:</label>
-            <input type="password" name="password2" id="id_password2" required>
-
-            <button class="button" type="submit">Sign Up</button>
+        <h2>Upload Medication</h2>
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload') }}">
+            <div>
+                <label for="image">Upload Medication Image:</label>
+                <input type="file"
+                       id="image"
+                       name="image"
+                       accept="image/*"
+                       required>
+            </div>
+            <button type="submit" class="button">Upload</button>
         </form>
-
-        <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
 
         <div class="messages">
             {% for message in messages %}
                 <p>{{ message }}</p>
             {% endfor %}
         </div>
+
+        <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
     </div>
 </body>
 </html>

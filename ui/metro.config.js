@@ -12,7 +12,7 @@ config.transformer = {
 };
 
 // Remove 'svg' from assetExts and add it to sourceExts so that Metro
-// processes SVG files as components rather than static assets.
+// processes SVG files as components rather than templates assets.
 if (config.resolver && config.resolver.assetExts) {
   config.resolver.assetExts = config.resolver.assetExts.filter(ext => ext !== 'svg');
 } else {

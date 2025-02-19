@@ -3,12 +3,12 @@ import io
 import easyocr
 from PIL import Image
 
-from MedsRecognition.biomed_ner_client import MedicalNERClient
-from MedsRecognition.models import Medication
+from biomed_ner_client import MedicalNERClient
+from models import Medication
 
 
 def recognise(request):
-    uploaded_file = request.FILES["image"]
+    uploaded_file = request.file
     image = Image.open(io.BytesIO(uploaded_file.read()))
     if image.mode in ("RGBA", "P"):
         image = image.convert("RGB")

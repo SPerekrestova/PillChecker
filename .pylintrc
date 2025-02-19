@@ -42,6 +42,7 @@ disable=C0301,C0114,C0115,C0116,R0903,E0401,W0718,W3101,E0307,C0411,R1705,W1514,
 # json and msvs (visual studio). You can also give a reporter class, e.g.
 # mypackage.mymodule.MyReporterClass.
 output-format=text
+fail-under=8.5
 
 # Tells whether to display a full report or only the messages.
 reports=no

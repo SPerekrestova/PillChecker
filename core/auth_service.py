@@ -1,9 +1,8 @@
-from MedsRecognition.supabase_client import get_supabase_client
+from supabase_client import get_supabase_client
 
 
 def sign_up_user(email: str, password: str):
     supabase = get_supabase_client()
-    # This will create a new user in your Supabase authentication
     response = supabase.auth.sign_up(
         {
             "email": email,

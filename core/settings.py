@@ -66,7 +66,7 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = "MedsRecognition.wsgi.application"
 
-STATIC_URL = "/static/"
+STATIC_URL = "/templates/"
 LOGIN_URL = "/login/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

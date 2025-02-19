@@ -93,9 +93,9 @@
     <h1>Welcome to MedsRecognition</h1>
     <p>This is the main page of the MedsRecognition application.</p>
 
-    <p><a class="nav-link" href="{% url 'dashboard' %}">Go to Dashboard</a></p>
-    <p><a class="nav-link" href="{% url 'login' %}">Log In</a></p>
-    <p><a class="nav-link" href="{% url 'logout' %}">Log Out</a></p>
+    <p><a class="nav-link" href="{{ url_for('dashboard') }}">Go to Dashboard</a></p>
+    <p><a class="nav-link" href="{{ url_for('login') }}">Log In</a></p>
+    <p><a class="nav-link" href="{{ url_for('logout') }}">Log Out</a></p>
 </div>
 
 </body>
