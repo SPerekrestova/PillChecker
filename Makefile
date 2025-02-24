@@ -18,7 +18,6 @@ test_core: pip_deps
 	cd core && \
 	pytest --cov=app tests/
 
-
 # Build image targets
 
 # Variables
@@ -29,6 +28,9 @@ IMAGE_REGISTRY = ghcr.io
 IMAGE_REPOSITORY = sperekrestova
 IMAGE_VERSION = latest
 
+# Define target platforms for multi-arch builds (including linux/arm64/v8)
+PLATFORMS = linux/amd64,linux/arm64/v8
+
 MODEL_IMAGE_TAG = $(IMAGE_REGISTRY)/$(IMAGE_REPOSITORY)/$(MODEL_IMAGE_NAME):$(IMAGE_VERSION)
 CORE_IMAGE_TAG = $(IMAGE_REGISTRY)/$(IMAGE_REPOSITORY)/$(CORE_IMAGE_NAME):$(IMAGE_VERSION)
 UI_IMAGE_TAG = $(IMAGE_REGISTRY)/$(IMAGE_REPOSITORY)/$(UI_IMAGE_NAME):$(IMAGE_VERSION)
@@ -38,15 +40,15 @@ PUSH_PARAMS = $(if $(PUSH),--push,)
 
 .PHONY: image-model
 image-model:
-	docker buildx build -t $(MODEL_IMAGE_TAG) $(PUSH_PARAMS) -f model/Dockerfile model
+	docker buildx build --platform $(PLATFORMS) -t $(MODEL_IMAGE_TAG) $(PUSH_PARAMS) -f model/Dockerfile model
 
 .PHONY: image-core
 image-core:
-	docker buildx build -t $(CORE_IMAGE_TAG) $(PUSH_PARAMS) -f core/Dockerfile core
+	docker buildx build --platform $(PLATFORMS) -t $(CORE_IMAGE_TAG) $(PUSH_PARAMS) -f core/Dockerfile core
 
 .PHONY: image-ui
 image-ui:
-	docker buildx build -t $(UI_IMAGE_TAG) $(PUSH_PARAMS) -f ui/Dockerfile ui
+	docker buildx build --platform $(PLATFORMS) -t $(UI_IMAGE_TAG) $(PUSH_PARAMS) -f ui/Dockerfile ui
 
 .PHONY: image
 image: image-model image-core image-ui
